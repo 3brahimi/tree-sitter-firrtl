@@ -1,0 +1,869 @@
+============================================
+version header
+============================================
+
+FIRRTL version 4.1.0
+circuit Top :
+  public module Top :
+    skip
+
+---
+
+(source_file
+  (version
+    (semver))
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (skip))))
+
+============================================
+multi-line annotations
+============================================
+
+FIRRTL version 3.3.0
+circuit Top :%[[
+  {"class":"x.Anno", "target":"~Top|Top>a [0]"}
+]]
+  module Top :
+    skip
+
+---
+
+(source_file
+  (version
+    (semver))
+  (circuit
+    (identifier)
+    (annotations)
+    (module
+      (identifier)
+      (skip))))
+
+============================================
+public module with enablelayer
+============================================
+
+circuit Top :
+  public module Top enablelayer A.B :
+    input clock : Clock
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (enablelayer
+        (layer_path
+          (identifier)
+          (identifier)))
+      (port
+        (dir)
+        (identifier)
+        (type)))))
+
+============================================
+extmodule with defname and parameters
+============================================
+
+circuit Top :
+  extmodule Ext :
+    input a : UInt<1>
+    output b : UInt<8>
+    defname = ExtImpl
+    parameter W = 8
+    parameter S = "s"
+    parameter R = 'r'
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number))))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number))))
+      (defname
+        (identifier))
+      (parameter
+        (identifier)
+        (number
+          (number)))
+      (parameter
+        (identifier)
+        (string
+          (string_content)))
+      (parameter
+        (identifier)
+        (raw_string
+          (string_content))))))
+
+============================================
+extmodule with 3.x ref
+============================================
+
+circuit Top :
+  extmodule Ext :
+    output p : Probe<UInt<1>>
+    ref p is "a.b"
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (type
+            (number
+              (number)))))
+      (ref_statement
+        (identifier)
+        (string
+          (string_content))))))
+
+============================================
+extmodule with knownlayer
+============================================
+
+circuit Top :
+  extmodule Ext knownlayer A, B.C :
+    input a : UInt<1>
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (knownlayer
+        (layer_path
+          (identifier))
+        (layer_path
+          (identifier)
+          (identifier)))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number)))))))
+
+============================================
+intmodule
+============================================
+
+circuit Top :
+  intmodule Plus :
+    output found : UInt<1>
+    intrinsic = circt.plusargs.test
+    parameter FORMAT = "foo"
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number))))
+      (intrinsic_spec
+        (intrinsic_name
+          (identifier)
+          (identifier)
+          (identifier)))
+      (parameter
+        (identifier)
+        (string
+          (string_content))))))
+
+============================================
+connect and invalidate
+============================================
+
+circuit Top :
+  module Top :
+    input a : UInt<8>
+    output b : { x : UInt<8>, flip y : UInt<8> }
+    invalidate b
+    connect b.x, a
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number))))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (field
+            (field_id
+              (identifier))
+            (type
+              (number
+                (number))))
+          (field
+            (field_id
+              (identifier))
+            (type
+              (number
+                (number))))))
+      (invalidate
+        (identifier))
+      (connect
+        (sub_field
+          (identifier)
+          (field_id
+            (identifier)))
+        (identifier)))))
+
+============================================
+regreset and reg
+============================================
+
+circuit Top :
+  module Top :
+    input clock : Clock
+    input reset : UInt<1>
+    regreset r : UInt<8>, clock, reset, UInt<8>(0h0)
+    reg q : UInt<8>, clock
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number))))
+      (regreset
+        (identifier)
+        (type
+          (number
+            (number)))
+        (identifier)
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (radix_int)))
+      (register
+        (identifier)
+        (type
+          (number
+            (number)))
+        (identifier)))))
+
+============================================
+radix literals and literal identifier
+============================================
+
+circuit Top :
+  module Top :
+    node `0` = UInt<6>(0b101010)
+    node b = SInt<7>(-0h2a)
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (node
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (radix_int)))
+      (node
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (radix_int))))))
+
+============================================
+layers and layerblocks
+============================================
+
+circuit Top :
+  layer A, bind, "dir" :
+    layer B, inline :
+  module Top :
+    layerblock A :
+      layerblock B :
+        skip
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (layer
+      (identifier)
+      (layer_convention)
+      (string
+        (string_content))
+      (layer
+        (identifier)
+        (layer_convention)))
+    (module
+      (identifier)
+      (layerblock
+        (identifier)
+        (layerblock
+          (identifier)
+          (skip))))))
+
+============================================
+3.0 declgroup and group
+============================================
+
+circuit Top :
+  declgroup A, bind :
+  module Top :
+    group A :
+      skip
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (layer
+      (identifier)
+      (layer_convention))
+    (module
+      (identifier)
+      (layerblock
+        (identifier)
+        (skip)))))
+
+============================================
+option and instchoice
+============================================
+
+circuit Top :
+  option Platform :
+    FPGA
+    ASIC
+  module Top :
+    instchoice c of Def, Platform :
+      FPGA => F
+      ASIC => G
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (option
+      (identifier)
+      (option_case
+        (identifier))
+      (option_case
+        (identifier)))
+    (module
+      (identifier)
+      (instchoice
+        (identifier)
+        (identifier)
+        (identifier)
+        (instchoice_case
+          (identifier)
+          (identifier))
+        (instchoice_case
+          (identifier)
+          (identifier))))))
+
+============================================
+probes define read force
+============================================
+
+circuit Top :
+  module Top :
+    output p : Probe<UInt<1>>
+    output q : RWProbe<UInt<1>, A.B>
+    wire w : UInt<1>
+    define p = probe(w)
+    define q = rwprobe(w)
+    node r = read(p)
+    force_initial(q, UInt<1>(1))
+    release_initial(q)
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (type
+            (number
+              (number)))))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (type
+            (number
+              (number)))
+          (layer_path
+            (identifier)
+            (identifier))))
+      (wire
+        (identifier)
+        (type
+          (number
+            (number))))
+      (define
+        (identifier)
+        (probe_operation
+          (identifier)))
+      (define
+        (identifier)
+        (probe_operation
+          (identifier)))
+      (node
+        (identifier)
+        (probe_operation
+          (identifier)))
+      (force
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number))))
+      (force
+        (identifier)))))
+
+============================================
+intrinsic statement and expression
+============================================
+
+circuit Top :
+  module Top :
+    input clock : Clock
+    intrinsic(circt_chisel_assert<format = "x">, clock, UInt<1>(1))
+    node f = intrinsic(circt_plusargs_test<FORMAT = "foo"> : UInt<1>)
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type))
+      (intrinsic_statement
+        (intrinsic
+          (intrinsic_name
+            (identifier))
+          (intrinsic_param
+            (identifier)
+            (string
+              (string_content)))
+          (identifier)
+          (literal
+            (litType
+              (number
+                (number)))
+            (number
+              (number)))))
+      (node
+        (identifier)
+        (intrinsic
+          (intrinsic_name
+            (identifier))
+          (intrinsic_param
+            (identifier)
+            (string
+              (string_content)))
+          (type
+            (number
+              (number))))))))
+
+============================================
+property types and propassign
+============================================
+
+circuit Top :
+  module Top :
+    output i : Integer
+    output l : List<String>
+    output s : String
+    output o : Inst<Top>
+    propassign i, integer_add(Integer(1), Integer(2))
+    propassign l, List<String>(String("a"), String("b"))
+    propassign s, String("x")
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (type)))
+      (port
+        (dir)
+        (identifier)
+        (type))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (identifier)))
+      (propassign
+        (identifier)
+        (primitive_operation
+          (primop)
+          (property_literal
+            (number
+              (number)))
+          (property_literal
+            (number
+              (number)))))
+      (propassign
+        (identifier)
+        (list_expression
+          (type)
+          (property_literal
+            (string
+              (string_content)))
+          (property_literal
+            (string
+              (string_content)))))
+      (propassign
+        (identifier)
+        (property_literal
+          (string
+            (string_content)))))))
+
+============================================
+enum and match
+============================================
+
+circuit Top :
+  module Top :
+    input e : {| A, B : UInt<2> |}
+    output o : UInt<2>
+    connect o, UInt<2>(0)
+    match e :
+      A :
+        skip
+      B(v) :
+        connect o, v
+    node n = {| A, B : UInt<2> |}(B, UInt<2>(1))
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (enum_variant
+            (identifier))
+          (enum_variant
+            (identifier)
+            (type
+              (number
+                (number))))))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (number
+            (number))))
+      (connect
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number))))
+      (match
+        (identifier)
+        (match_branch
+          (identifier)
+          (suite
+            (skip)))
+        (match_branch
+          (identifier)
+          (identifier)
+          (suite
+            (connect
+              (identifier)
+              (identifier)))))
+      (node
+        (identifier)
+        (enum_expression
+          (enum_variant
+            (identifier))
+          (enum_variant
+            (identifier)
+            (type
+              (number
+                (number))))
+          (identifier)
+          (literal
+            (litType
+              (number
+                (number)))
+            (number
+              (number))))))))
+
+============================================
+named commands
+============================================
+
+circuit Top :
+  module Top :
+    input clock : Clock
+    printf(clock, UInt<1>(1), "x=%d", UInt<1>(0)) : p0
+    assert(clock, UInt<1>(1), UInt<1>(1), "ok") : a0
+    cover(clock, UInt<1>(1), UInt<1>(1), "c") : c0
+    stop(clock, UInt<1>(0), 1) : s0
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type))
+      (printf
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (string
+          (string_content))
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (identifier))
+      (verif
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (string
+          (string_content))
+        (identifier))
+      (verif
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (string
+          (string_content))
+        (identifier))
+      (stop
+        (identifier)
+        (literal
+          (litType
+            (number
+              (number)))
+          (number
+            (number)))
+        (number
+          (number))
+        (identifier)))))
+
+============================================
+formal test
+============================================
+
+circuit Top :
+  module Top :
+    skip
+  formal T of Top :
+    bound = 10
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (skip))
+    (formal
+      (identifier)
+      (identifier)
+      (formal_param
+        (identifier)
+        (number
+          (number))))))
+
+============================================
+type alias and const
+============================================
+
+circuit Top :
+  type Word = UInt<32>
+  module Top :
+    input a : Word
+    input b : const UInt<8>[4]
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (type_alias
+      (identifier)
+      (type
+        (number
+          (number))))
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type
+          (identifier)))
+      (port
+        (dir)
+        (identifier)
+        (type
+          (qualifier)
+          (type
+            (type
+              (number
+                (number)))
+            (number
+              (number))))))))
+
+============================================
+class and object
+============================================
+
+circuit Top :
+  class C :
+    input i : Integer
+  extclass E :
+    output o : String
+  module Top :
+    object c of C
+
+---
+
+(source_file
+  (circuit
+    (identifier)
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type)))
+    (module
+      (identifier)
+      (port
+        (dir)
+        (identifier)
+        (type)))
+    (module
+      (identifier)
+      (object
+        (identifier)
+        (identifier)))))

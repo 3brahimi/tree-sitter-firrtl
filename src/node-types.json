@@ -8,7 +8,19 @@
         "named": true
       },
       {
+        "type": "enum_expression",
+        "named": true
+      },
+      {
         "type": "identifier",
+        "named": true
+      },
+      {
+        "type": "intrinsic",
+        "named": true
+      },
+      {
+        "type": "list_expression",
         "named": true
       },
       {
@@ -21,6 +33,14 @@
       },
       {
         "type": "primitive_operation",
+        "named": true
+      },
+      {
+        "type": "probe_operation",
+        "named": true
+      },
+      {
+        "type": "property_literal",
         "named": true
       },
       {
@@ -50,7 +70,19 @@
         "named": true
       },
       {
+        "type": "connect",
+        "named": true
+      },
+      {
         "type": "connection",
+        "named": true
+      },
+      {
+        "type": "define",
+        "named": true
+      },
+      {
+        "type": "force",
         "named": true
       },
       {
@@ -58,7 +90,27 @@
         "named": true
       },
       {
+        "type": "instchoice",
+        "named": true
+      },
+      {
+        "type": "intrinsic_statement",
+        "named": true
+      },
+      {
+        "type": "invalidate",
+        "named": true
+      },
+      {
         "type": "is_invalid",
+        "named": true
+      },
+      {
+        "type": "layerblock",
+        "named": true
+      },
+      {
+        "type": "match",
         "named": true
       },
       {
@@ -70,6 +122,10 @@
         "named": true
       },
       {
+        "type": "object",
+        "named": true
+      },
+      {
         "type": "partial_connection",
         "named": true
       },
@@ -78,11 +134,23 @@
         "named": true
       },
       {
+        "type": "propassert",
+        "named": true
+      },
+      {
+        "type": "propassign",
+        "named": true
+      },
+      {
         "type": "rdwr",
         "named": true
       },
       {
         "type": "register",
+        "named": true
+      },
+      {
+        "type": "regreset",
         "named": true
       },
       {
@@ -136,8 +204,16 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "annotations",
+          "named": true
+        },
+        {
+          "type": "formal",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -147,7 +223,19 @@
           "named": true
         },
         {
+          "type": "layer",
+          "named": true
+        },
+        {
           "type": "module",
+          "named": true
+        },
+        {
+          "type": "option",
+          "named": true
+        },
+        {
+          "type": "type_alias",
           "named": true
         }
       ]
@@ -192,7 +280,45 @@
     }
   },
   {
+    "type": "connect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "connection",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define",
     "named": true,
     "fields": {},
     "children": {
@@ -254,6 +380,59 @@
     }
   },
   {
+    "type": "enablelayer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "layer_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "enum_variant",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_variant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "field",
     "named": true,
     "fields": {},
@@ -296,6 +475,87 @@
     }
   },
   {
+    "type": "force",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "formal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal_param",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "raw_string",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "formal_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "raw_string",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "identifier",
     "named": true,
     "fields": {}
@@ -320,6 +580,174 @@
     }
   },
   {
+    "type": "instchoice",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "instchoice_case",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "instchoice_case",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "intrinsic",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "intrinsic_name",
+          "named": true
+        },
+        {
+          "type": "intrinsic_param",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "intrinsic_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "intrinsic_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "raw_string",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "intrinsic_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "intrinsic_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "intrinsic_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "intrinsic",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "invalidate",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "is_invalid",
     "named": true,
     "fields": {},
@@ -333,6 +761,118 @@
         },
         {
           "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "knownlayer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "layer_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "layer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "layer",
+          "named": true
+        },
+        {
+          "type": "layer_convention",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "layer_convention",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "layer_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "layerblock",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "port",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -371,6 +911,56 @@
         },
         {
           "type": "number_str",
+          "named": true
+        },
+        {
+          "type": "radix_int",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "match",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "match_branch",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "match_branch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "suite",
           "named": true
         }
       ]
@@ -444,6 +1034,10 @@
           "named": true
         },
         {
+          "type": "enablelayer",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -452,11 +1046,27 @@
           "named": true
         },
         {
+          "type": "intrinsic_spec",
+          "named": true
+        },
+        {
+          "type": "knownlayer",
+          "named": true
+        },
+        {
           "type": "parameter",
           "named": true
         },
         {
           "type": "port",
+          "named": true
+        },
+        {
+          "type": "ref_statement",
+          "named": true
+        },
+        {
+          "type": "requires",
           "named": true
         },
         {
@@ -510,6 +1120,67 @@
       "types": [
         {
           "type": "number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "option_case",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "option_case",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
           "named": true
         }
       ]
@@ -586,10 +1257,6 @@
           "named": true
         },
         {
-          "type": "qualifier",
-          "named": true
-        },
-        {
           "type": "type",
           "named": true
         }
@@ -648,6 +1315,86 @@
     }
   },
   {
+    "type": "probe_operation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "propassert",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "propassign",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "double",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "qualifier",
     "named": true,
     "fields": {}
@@ -695,6 +1442,25 @@
     }
   },
   {
+    "type": "ref_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "register",
     "named": true,
     "fields": {},
@@ -716,6 +1482,44 @@
         },
         {
           "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "regreset",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "requires",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -808,6 +1612,10 @@
       "types": [
         {
           "type": "circuit",
+          "named": true
+        },
+        {
+          "type": "version",
           "named": true
         }
       ]
@@ -932,11 +1740,50 @@
       "required": false,
       "types": [
         {
+          "type": "enum_variant",
+          "named": true
+        },
+        {
           "type": "field",
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "layer_path",
+          "named": true
+        },
+        {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "qualifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "info",
           "named": true
         },
         {
@@ -964,7 +1811,26 @@
           "named": true
         },
         {
+          "type": "info",
+          "named": true
+        },
+        {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "version",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "semver",
           "named": true
         }
       ]
@@ -1089,7 +1955,15 @@
     "named": false
   },
   {
+    "type": "AnyRef",
+    "named": false
+  },
+  {
     "type": "AsyncReset",
+    "named": false
+  },
+  {
+    "type": "Bool",
     "named": false
   },
   {
@@ -1097,7 +1971,39 @@
     "named": false
   },
   {
+    "type": "Double",
+    "named": false
+  },
+  {
+    "type": "FIRRTL",
+    "named": false
+  },
+  {
     "type": "Fixed",
+    "named": false
+  },
+  {
+    "type": "Inst",
+    "named": false
+  },
+  {
+    "type": "Integer",
+    "named": false
+  },
+  {
+    "type": "List",
+    "named": false
+  },
+  {
+    "type": "Path",
+    "named": false
+  },
+  {
+    "type": "Probe",
+    "named": false
+  },
+  {
+    "type": "RWProbe",
     "named": false
   },
   {
@@ -1106,6 +2012,10 @@
   },
   {
     "type": "SInt",
+    "named": false
+  },
+  {
+    "type": "String",
     "named": false
   },
   {
@@ -1133,6 +2043,10 @@
     "named": false
   },
   {
+    "type": "annotations",
+    "named": true
+  },
+  {
     "type": "asAsyncReset",
     "named": false
   },
@@ -1142,6 +2056,10 @@
   },
   {
     "type": "asFixedPoint",
+    "named": false
+  },
+  {
+    "type": "asReset",
     "named": false
   },
   {
@@ -1165,7 +2083,23 @@
     "named": false
   },
   {
+    "type": "bind",
+    "named": false
+  },
+  {
     "type": "bits",
+    "named": false
+  },
+  {
+    "type": "bool_and",
+    "named": false
+  },
+  {
+    "type": "bool_or",
+    "named": false
+  },
+  {
+    "type": "bool_xor",
     "named": false
   },
   {
@@ -1189,12 +2123,20 @@
     "named": false
   },
   {
+    "type": "class",
+    "named": false
+  },
+  {
     "type": "cmem",
     "named": false
   },
   {
     "type": "comment",
     "named": true
+  },
+  {
+    "type": "connect",
+    "named": false
   },
   {
     "type": "const",
@@ -1210,6 +2152,14 @@
   },
   {
     "type": "data-type",
+    "named": false
+  },
+  {
+    "type": "declgroup",
+    "named": false
+  },
+  {
+    "type": "define",
     "named": false
   },
   {
@@ -1249,6 +2199,10 @@
     "named": false
   },
   {
+    "type": "enablelayer",
+    "named": false
+  },
+  {
     "type": "eq",
     "named": false
   },
@@ -1257,7 +2211,19 @@
     "named": true
   },
   {
+    "type": "extclass",
+    "named": false
+  },
+  {
     "type": "extmodule",
+    "named": false
+  },
+  {
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "fflush",
     "named": false
   },
   {
@@ -1265,7 +2231,27 @@
     "named": false
   },
   {
+    "type": "force",
+    "named": false
+  },
+  {
+    "type": "force_initial",
+    "named": false
+  },
+  {
+    "type": "formal",
+    "named": false
+  },
+  {
+    "type": "fprintf",
+    "named": false
+  },
+  {
     "type": "geq",
+    "named": false
+  },
+  {
+    "type": "group",
     "named": false
   },
   {
@@ -1285,6 +2271,10 @@
     "named": true
   },
   {
+    "type": "inline",
+    "named": false
+  },
+  {
     "type": "input",
     "named": false
   },
@@ -1293,7 +2283,39 @@
     "named": false
   },
   {
+    "type": "instchoice",
+    "named": false
+  },
+  {
+    "type": "integer_add",
+    "named": false
+  },
+  {
+    "type": "integer_mul",
+    "named": false
+  },
+  {
+    "type": "integer_shl",
+    "named": false
+  },
+  {
+    "type": "integer_shr",
+    "named": false
+  },
+  {
+    "type": "intmodule",
+    "named": false
+  },
+  {
+    "type": "intrinsic",
+    "named": false
+  },
+  {
     "type": "invalid",
+    "named": false
+  },
+  {
+    "type": "invalidate",
     "named": false
   },
   {
@@ -1301,7 +2323,23 @@
     "named": false
   },
   {
+    "type": "knownlayer",
+    "named": false
+  },
+  {
+    "type": "layer",
+    "named": false
+  },
+  {
+    "type": "layerblock",
+    "named": false
+  },
+  {
     "type": "leq",
+    "named": false
+  },
+  {
+    "type": "list_concat",
     "named": false
   },
   {
@@ -1309,7 +2347,15 @@
     "named": false
   },
   {
+    "type": "match",
+    "named": false
+  },
+  {
     "type": "mem",
+    "named": false
+  },
+  {
+    "type": "mod",
     "named": false
   },
   {
@@ -1353,11 +2399,19 @@
     "named": true
   },
   {
+    "type": "object",
+    "named": false
+  },
+  {
     "type": "of",
     "named": false
   },
   {
     "type": "old",
+    "named": false
+  },
+  {
+    "type": "option",
     "named": false
   },
   {
@@ -1381,8 +2435,36 @@
     "named": false
   },
   {
+    "type": "path",
+    "named": false
+  },
+  {
     "type": "printf",
     "named": false
+  },
+  {
+    "type": "probe",
+    "named": false
+  },
+  {
+    "type": "prop_eq",
+    "named": false
+  },
+  {
+    "type": "propassert",
+    "named": false
+  },
+  {
+    "type": "propassign",
+    "named": false
+  },
+  {
+    "type": "public",
+    "named": false
+  },
+  {
+    "type": "radix_int",
+    "named": true
   },
   {
     "type": "rdwr",
@@ -1409,7 +2491,15 @@
     "named": false
   },
   {
+    "type": "ref",
+    "named": false
+  },
+  {
     "type": "reg",
+    "named": false
+  },
+  {
+    "type": "regreset",
     "named": false
   },
   {
@@ -1417,12 +2507,32 @@
     "named": true
   },
   {
+    "type": "release",
+    "named": false
+  },
+  {
+    "type": "release_initial",
+    "named": false
+  },
+  {
     "type": "rem",
+    "named": false
+  },
+  {
+    "type": "requires",
     "named": false
   },
   {
     "type": "reset",
     "named": false
+  },
+  {
+    "type": "rwprobe",
+    "named": false
+  },
+  {
+    "type": "semver",
+    "named": true
   },
   {
     "type": "shl",
@@ -1445,6 +2555,10 @@
     "named": false
   },
   {
+    "type": "string_concat",
+    "named": false
+  },
+  {
     "type": "string_content",
     "named": true
   },
@@ -1457,11 +2571,23 @@
     "named": false
   },
   {
+    "type": "true",
+    "named": false
+  },
+  {
+    "type": "type",
+    "named": false
+  },
+  {
     "type": "undefined",
     "named": false
   },
   {
     "type": "validif",
+    "named": false
+  },
+  {
+    "type": "version",
     "named": false
   },
   {
@@ -1498,6 +2624,14 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "{|",
+    "named": false
+  },
+  {
+    "type": "|}",
     "named": false
   },
   {

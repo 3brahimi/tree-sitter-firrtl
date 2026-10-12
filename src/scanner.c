@@ -37,6 +37,7 @@ enum TokenType {
     NEWLINE,
     INDENT,
     DEDENT,
+    ANNOTATIONS,
     ERROR,
 };
 
@@ -51,6 +52,47 @@ typedef struct {
 } Scanner;
 
 static inline void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
+
+static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
+
+// Scans a `%[ json ]` annotation block, which may span lines. Brackets and
+// braces nest; string contents (with escapes) are skipped.
+static bool scan_annotations(TSLexer *lexer) {
+    advance(lexer); // '%'
+    if (lexer->lookahead != '[') {
+        return false;
+    }
+    uint32_t depth = 0;
+    bool in_string = false;
+    while (!lexer->eof(lexer)) {
+        int32_t c = lexer->lookahead;
+        advance(lexer);
+        if (in_string) {
+            if (c == '\\' && !lexer->eof(lexer)) {
+                advance(lexer);
+            } else if (c == '"') {
+                in_string = false;
+            }
+            continue;
+        }
+        if (c == '"') {
+            in_string = true;
+        } else if (c == '[' || c == '{') {
+            depth++;
+        } else if (c == ']' || c == '}') {
+            if (depth == 0) {
+                return false;
+            }
+            depth--;
+            if (depth == 0) {
+                lexer->mark_end(lexer);
+                lexer->result_symbol = ANNOTATIONS;
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 bool tree_sitter_firrtl_external_scanner_scan(void *payload, TSLexer *lexer,
                                               const bool *valid_symbols) {
@@ -97,6 +139,11 @@ bool tree_sitter_firrtl_external_scanner_scan(void *payload, TSLexer *lexer,
         } else {
             break;
         }
+    }
+
+    if (!found_end_of_line && valid_symbols[ANNOTATIONS] &&
+        lexer->lookahead == '%') {
+        return scan_annotations(lexer);
     }
 
     if (found_end_of_line) {
