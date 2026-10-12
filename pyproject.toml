@@ -1,0 +1,29 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools>=62.4.0", "wheel" ]
+
+[project]
+authors = [ { name = "Aliaksei Chapyzhenka" } ]
+classifiers = [
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Compilers",
+  "Topic :: Text Processing :: Linguistic",
+  "Typing :: Typed",
+]
+description = "FIRRTL grammar for tree-sitter"
+keywords = [ "incremental", "parsing", "tree-sitter", "firrtl" ]
+license.text = "Apache-2.0"
+name = "tree-sitter-firrtl"
+readme = "README.md"
+requires-python = ">=3.10"
+version = "0.8.0"
+
+[project.urls]
+Homepage = "https://github.com/tree-sitter-grammars/tree-sitter-firrtl"
+
+[project.optional-dependencies]
+core = [ "tree-sitter>=0.25" ]
+
+[tool.cibuildwheel]
+build = "cp310-*"
+build-frontend = "build"

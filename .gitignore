@@ -4,3 +4,9 @@ package-lock.json
 /node_modules
 /examples/*/
 /target
+
+# Python binding build outputs
+*.egg-info/
+__pycache__/
+*.so
+dist/
